@@ -18,9 +18,11 @@ function Car(props) {
                 object.castShadow = true;
                 object.receiveShadow = true;
                 object.material.envMapIntensity = 20;
+                object.material.metalness = 1;
+                object.material.roughness = 1;
             }
         })
-    },[gltf])
+    },[0])
 
     useFrame((state,delta)=>{
         let t = state.clock.getElapsedTime();

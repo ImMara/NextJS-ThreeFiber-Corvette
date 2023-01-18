@@ -33,7 +33,7 @@ function CarShow(){
                 attach="background"
             />
 
-            <CubeCamera resolution={256} frames={Infinity} >
+            <CubeCamera resolution={512} frames={Infinity} >
                 {
                     (texture) => (
                         <>

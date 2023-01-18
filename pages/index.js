@@ -17,7 +17,9 @@ import Ring from "../components/Ring";
 import {Boxes} from "../components/Boxes";
 import {Bloom, ChromaticAberration, DepthOfField, EffectComposer} from "@react-three/postprocessing";
 import {BlendFunction} from 'postprocessing';
+import round from "lodash/round";
 import FloatingGrid from "../components/FloatingGrid";
+import Loading from "../components/loading";
 
 function CarShow(){
     return(
@@ -112,12 +114,12 @@ function CarShow(){
     )
 }
 export default function Home() {
-    const [dpr, setDpr] = useState(1.5)
+    const [dpr, setDpr] = useState(1)
 
     return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<Loading/>}>
       <Canvas shadows dpr={dpr}>
-          <PerformanceMonitor onIncline={() => setDpr(2)} onDecline={() => setDpr(0.4)} />
+          <PerformanceMonitor onIncline={() => setDpr(1)} onDecline={() => setDpr(0.4)}  />
           <CarShow/>
       </Canvas>
     </Suspense>

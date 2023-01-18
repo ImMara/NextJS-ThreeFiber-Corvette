@@ -3,7 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {Canvas} from "@react-three/fiber";
 import {Suspense} from "react";
-import {CubeCamera, Environment, OrbitControls, PerspectiveCamera} from "@react-three/drei";
+import {CubeCamera, Detailed, Environment, OrbitControls, PerspectiveCamera} from "@react-three/drei";
 import Ground from "../components/Ground";
 import Car from "../components/Car";
 import Ring from "../components/Ring";
@@ -38,7 +38,9 @@ function CarShow(){
                     (texture) => (
                         <>
                             <Environment map={texture} />
-                            <Car/>
+                            <Detailed distances={[0, 10, 20, 0]} >
+                                <Car />
+                            </Detailed>
                         </>
                     )
                 }
@@ -73,7 +75,7 @@ function CarShow(){
 
             <Ground/>
 
-            <EffectComposer>
+            {/* <EffectComposer>
                     <DepthOfField
                         focusDistance={0.0035}
                         focalLength={0.01}
@@ -82,7 +84,7 @@ function CarShow(){
                     />
                     <Bloom
                         blendFunction={BlendFunction.ADD}
-                        intensity={1.3}
+                        intensity={0.3}
                         width={300}
                         height={300}
                         kernelSize={5}

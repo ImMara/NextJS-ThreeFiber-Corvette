@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "^9.53.0",
     "@react-three/fiber": "^8.10.0",
     "@react-three/postprocessing": "^2.7.0",
     "next": "13.1.2",

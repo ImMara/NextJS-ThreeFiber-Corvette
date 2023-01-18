@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useFrame, useLoader} from "@react-three/fiber";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import {Mesh} from "three"
+import {Detailed} from "@react-three/drei";
 
 function Car(props) {
 
@@ -11,7 +12,7 @@ function Car(props) {
     )
 
     useEffect(()=>{
-        gltf.scene.scale.set(0.007,0.007, 0.007);
+        gltf.scene.scale.set(0.004,0.004, 0.004);
         gltf.scene.position.set(0,-0.035,0);
         gltf.scene.traverse((object)=>{
             if(object instanceof Mesh){
@@ -20,6 +21,7 @@ function Car(props) {
                 object.material.envMapIntensity = 20;
                 object.material.metalness = 1;
                 object.material.roughness = 1;
+                // reduce pixelation
             }
         })
     },[0])
@@ -34,7 +36,13 @@ function Car(props) {
         group.children[6].rotation.x = t *2;
     })
 
-    return <primitive object={gltf.scene} />
+    return (
+        <Detailed
+            distances={[0, 10, 20, 0]}
+        >
+            <primitive object={gltf.scene} />
+        </Detailed>
+    )
 }
 
 export default Car;

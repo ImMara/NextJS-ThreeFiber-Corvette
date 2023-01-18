@@ -2,8 +2,15 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {Canvas} from "@react-three/fiber";
-import {Suspense} from "react";
-import {CubeCamera, Detailed, Environment, OrbitControls, PerspectiveCamera} from "@react-three/drei";
+import {Suspense, useState} from "react";
+import {
+    CubeCamera,
+    Detailed,
+    Environment,
+    OrbitControls,
+    PerformanceMonitor,
+    PerspectiveCamera
+} from "@react-three/drei";
 import Ground from "../components/Ground";
 import Car from "../components/Car";
 import Ring from "../components/Ring";
@@ -38,9 +45,7 @@ function CarShow(){
                     (texture) => (
                         <>
                             <Environment map={texture} />
-                            <Detailed distances={[0, 10, 20, 0]} >
-                                <Car />
-                            </Detailed>
+                            <Car />
                         </>
                     )
                 }
@@ -49,8 +54,8 @@ function CarShow(){
 
             <Ring/>
             <Boxes />
-            <FloatingGrid/>
-            {/* <ambientLight intensity={0.5} /> */}
+            {/*<FloatingGrid/>*/}
+             <ambientLight intensity={0.3} />
 
             {/* adding spotlight */}
             <spotLight
@@ -75,7 +80,7 @@ function CarShow(){
 
             <Ground/>
 
-            {/* <EffectComposer>
+           <EffectComposer>
                     <DepthOfField
                         focusDistance={0.0035}
                         focalLength={0.01}
@@ -107,11 +112,15 @@ function CarShow(){
     )
 }
 export default function Home() {
-  return (
+    const [dpr, setDpr] = useState(1.5)
+
+    return (
     <Suspense fallback={null}>
-      <Canvas shadows>
+      <Canvas shadows dpr={dpr}>
+          <PerformanceMonitor onIncline={() => setDpr(2)} onDecline={() => setDpr(0.4)} />
           <CarShow/>
       </Canvas>
     </Suspense>
+
   )
 }

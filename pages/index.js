@@ -114,12 +114,12 @@ function CarShow(){
     )
 }
 export default function Home() {
-    const [dpr, setDpr] = useState(1)
+    const [dpr, setDpr] = useState(2)
 
     return (
     <Suspense fallback={<Loading/>}>
       <Canvas shadows dpr={dpr}>
-          <PerformanceMonitor onIncline={() => setDpr(1)} onDecline={() => setDpr(0.4)}  />
+          <PerformanceMonitor onChange={({ factor }) => setDpr(round(0.5 + 1.5 * factor, 2))}  />
           <CarShow/>
       </Canvas>
     </Suspense>
